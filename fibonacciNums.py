@@ -1,12 +1,15 @@
-sum =1
-a=1
-b=0
-num=0
+def calculate_fibonacci_sum(limit):
+    sum = 0
+    a = 1
+    b = 0
+    fnum = 0
 
-while num <4000000 :
- a=b
- b=sum
- sum = a + b
- if sum % 2 == 0:
-  num += sum
-print(num)
+    while fnum < limit:
+        a, b = b, a + b
+        if b % 2 == 0:
+            fnum += b
+
+    return fnum
+
+result = calculate_fibonacci_sum(4000000)
+print(result)
