@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="pal.css">
+  <title>LARGEST PALINDROME PRODUCT</title>
+</head>
+<body>
+  <h1>Finding the largest palindrome</h1>
+  <div class="container" >
+    <div class="input-group ">
+      <label for="numberInput">Enter a 3 digit number:</label>
+      <input type="number" id="numberInput" placeholder="Enter a 3-digit number">
+    </div>
+    <button id="calculateButton">Find Largest Palindrome</button>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    function findLargestPalindrome() {
+      const numberInput = document.getElementById('numberInput');
+      const resultDiv = document.getElementById('result');
+      
+      // Clear previous result
+      resultDiv.textContent = '';
+      
+      const inputValue = parseInt(numberInput.value);
+      
+      if (isNaN(inputValue) || inputValue < 100 || inputValue > 999) {
+        resultDiv.textContent = 'Please enter a valid 3-digit number.';
+        return;
+      }
+      
+      let largestPalindrome = 0;
+      
+      for (let i = 999; i >= 100; i--) {
+        for (let j = 999; j >= 100; j--) {
+          const product = i * j;
+          
+          if (isPalindrome(product) && product > largestPalindrome) {
+            largestPalindrome = product;
+          }
+        }
+      }
+      
+      resultDiv.textContent = `The largest palindrome made from the product of two 3-digit numbers is: ${largestPalindrome}`;
+    }
+    
+    function isPalindrome(number) {
+      const reverseString = number.toString().split('').reverse().join('');
+      return number.toString() === reverseString;
+    }
+    
+    const calculateButton = document.getElementById('calculateButton');
+    calculateButton.addEventListener('click', findLargestPalindrome);
+  </script>
+</body>
+</html>
